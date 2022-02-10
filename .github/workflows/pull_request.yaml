@@ -1,15 +1,18 @@
-name: PR Action
+# preview 라벨이 달린 PR에 대한 Docker Image 빌드 Action
+name: PR Preview Build
 on:
   pull_request:
     types:
       - opened
       - synchronize
       - reopened
+      - labeled
     branches:
       - main
 jobs:
   build-docker:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'preview')
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
