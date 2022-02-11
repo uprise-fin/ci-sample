@@ -33,6 +33,6 @@ jobs:
           file: base.dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: 
-            - ghcr.io/uprise-fin/ci-sample:base-latest
-            - ghcr.io/uprise-fin/ci-sample:${{ github.ref }}"
+          tags: |
+            ghcr.io/uprise-fin/ci-sample:base-latest
+            ghcr.io/uprise-fin/ci-sample:${{ github.ref }}"
