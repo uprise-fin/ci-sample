@@ -35,4 +35,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/uprise-fin/ci-sample:base-latest
-            ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}"
+            ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}
