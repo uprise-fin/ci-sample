@@ -18,7 +18,7 @@ UPRISE의 Github Action CI 샘플 프로젝트입니다.
   PR에 preview 태그를 다는 경우에 PR 프리뷰용 이미지를 빌드하는 워크플로우입니다. PR preview 배포가 필요한 경우에 사용됩니다.
 
 #### ci.yaml
- CI 과정에 대한 워크플로우입니다. 이 샘플에서는 유닛테스트와  테스트 커버리지 체크를 합니다. [예제PR](https://github.com/uprise-fin/ci-sample/pull/4) 참고 바랍니다.
+ CI 과정에 대한 워크플로우입니다. 이 샘플에서는 유닛테스트와  테스트 커버리지 체크를 합니다. [예제 PR](https://github.com/uprise-fin/ci-sample/pull/4) 참고 바랍니다.
 
 #### release_drafter.yaml
  PR에 main 브랜치에 머지될 때마다 GitHub Release Draft에 반영해주는 워크플로우입니다. [예제 Release](https://github.com/uprise-fin/ci-sample/releases/tag/v0.0.2) 참고 바랍니다.
