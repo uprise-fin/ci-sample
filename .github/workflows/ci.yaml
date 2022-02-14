@@ -15,7 +15,7 @@ on:
     paths-ignore:
       - README.md
 jobs:
-  build-docker:
+  test:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/uprise-fin/ci-sample:base-latest
@@ -29,7 +29,9 @@ jobs:
           pip install -r requirements-dev.txt
       
       - name: Run unittest
-        run: make test
+        run: |
+          pytest --cov=app . --cov-report xml:coverage.xml --junitxml=junit.xml
+          coverage2clover < coverage.xml > clover.xml
 
       - name: Monitor coverage
         if: ${{ github.event_name == 'pull_request'}}
