@@ -1,0 +1,41 @@
+# preview 라벨이 달린 PR에 대한 Docker Image 빌드 Action
+name: CI
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - README.md
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/uprise-fin/ci-sample:base-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install pacakges
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Run unittest
+        run: make test
+
+      - name: Monitor coverage
+        if: ${{ github.event_name == 'pull_request'}}
+        uses: slavcodev/coverage-monitor-action@1.2.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover_file: "clover.xml"
+          threshold_alert: 10
+          threshold_warning: 50

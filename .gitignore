@@ -1,2 +1,5 @@
 __pycache__
-reports/
+coverage.xml
+junit.xml
+clover.xml
+.coverage
