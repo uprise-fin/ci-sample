@@ -58,6 +58,6 @@ jobs:
           commit_user_name: heybit-ci-bot
           commit_user_email: ci-bot@heybit.io
           commit_author: heybit-ci-bot <ci-bot@heybit.io>
-          commit_message: chore: update image version of ci-sample to ${{ github.ref_name }}
+          commit_message: "chore: update image version of ci-sample to ${{ github.ref_name }}"
 
 
