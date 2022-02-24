@@ -39,3 +39,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/uprise-fin/ci-sample:${{ github.event.pull_request.head.sha }}
+
+      - name: PR Comment for link
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            Preview URL: "http://ci-sample-${{ github.event.number }}.pr-ci-sample.dev.service.eks/"
+            TailScale이 켜져 있는 경우에만 접속 가능합니다.
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
