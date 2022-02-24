@@ -38,17 +38,25 @@ jobs:
             ghcr.io/uprise-fin/ci-sample:latest
             ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}
 
-      - uses: Stockopedia/action-octommit@v1
+      - name: Checkout EKS Config Repo
+        uses: actions/checkout@v2
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            octommit.update()
-              .org("uprise-fin")
-              .repository("heybit-eks-apps")
-              .sourceBranch("main")
-              .outputBranch("main")
-              .sourcePath("service-apps/ci-sample/values.yaml")
-              .outputPath("service-apps/ci-sample/values.yaml")
-              .set("image.tag", "${{ github.ref_name }}")
-              .commit("chore: update image version of ci-sample to ${{ github.ref_name }}")
-              .run();
+          repository: uprise-fin/heybit-eks-apps
+          path: heybit-eks-apps
+          branch: main
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Update Docker Image Tag
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq e -i -P  '.image.tag |= "${{ github.ref_name }}"' heybit-eks-apps/service-apps/ci-sample/values.yaml
+
+      - name: Commit to EKS Config Repo
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: heybit-eks-apps
+          commit_user_name: heybit-ci-bot
+          commit_user_email: ci-bot@heybit.io
+          commit_author: heybit-ci-bot <ci-bot@heybit.io>
+
+
