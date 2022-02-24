@@ -49,6 +49,6 @@ jobs:
               .outputBranch("main")
               .sourcePath("service-apps/ci-sample/values.yaml")
               .outputPath("service-apps/ci-sample/values.yaml")
-              .set("image.tag", ${{ github.ref_name }})
+              .set("image.tag", "${{ github.ref_name }}")
               .commit("chore: update image version of ci-sample to ${{ github.ref_name }}")
               .run();
