@@ -37,3 +37,26 @@ jobs:
           tags: |
             ghcr.io/uprise-fin/ci-sample:latest
             ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}
+
+      - name: Checkout Config Repo
+        uses: actions/checkout@v2
+        with:
+          repository: uprise-fin/heybit-eks-apps
+          path: heybit-eks-apps
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Update Config Repo
+        uses: fjogeleit/yaml-update-action@v0.7.0
+        with:
+          valueFile: 'service-apps/ci-sample/values.yaml'
+          propertyPath: 'image.tag'
+          value: ${{ github.ref_name }}
+          commitChange: true
+          updateFile: true
+          branch: main
+          masterBranchName: main
+          repository: uprise-fin/heybit-eks-apps
+          message: 'chore: update image version of ci-sample to ${{ github.ref_name }}'
+          workDir: heybit-eks-apps
+          
+
