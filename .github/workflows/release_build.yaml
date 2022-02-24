@@ -38,7 +38,7 @@ jobs:
             ghcr.io/uprise-fin/ci-sample:latest
             ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}
 
-      - uses: Stockopedia/octommit@v1
+      - uses: Stockopedia/octommit@v1.0.19
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
