@@ -38,25 +38,17 @@ jobs:
             ghcr.io/uprise-fin/ci-sample:latest
             ghcr.io/uprise-fin/ci-sample:${{ github.ref_name }}
 
-      - name: Checkout Config Repo
-        uses: actions/checkout@v2
+      - uses: Stockopedia/octommit@v1
         with:
-          repository: uprise-fin/heybit-eks-apps
-          path: heybit-eks-apps
-          token: ${{ secrets.GH_TOKEN }}
-
-      - name: Update Config Repo
-        uses: fjogeleit/yaml-update-action@v0.7.0
-        with:
-          valueFile: 'service-apps/ci-sample/values.yaml'
-          propertyPath: 'image.tag'
-          value: ${{ github.ref_name }}
-          commitChange: true
-          updateFile: true
-          branch: main
-          masterBranchName: main
-          repository: uprise-fin/heybit-eks-apps
-          message: 'chore: update image version of ci-sample to ${{ github.ref_name }}'
-          workDir: heybit-eks-apps
-          
-
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            octommit.update()
+              .org("uprise-fin")
+              .repository("heybit-eks-apps")
+              .sourceBranch("main")
+              .outputBranch("main")
+              .sourcePath("service-apps/ci-sample/values.yaml")
+              .outputPath("service-apps/ci-sample/values.yaml")
+              .set("image.tag", ${{ github.ref_name }})
+              .commit("chore: update image version of ci-sample to ${{ github.ref_name }}")
+              .run();
