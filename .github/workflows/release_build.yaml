@@ -49,7 +49,7 @@ jobs:
       - name: Update Docker Image Tag
         uses: mikefarah/yq@master
         with:
-          cmd: yq e -i -P  '.image.tag |= "${{ github.ref_name }}"' heybit-eks-apps/service-apps/envs/dev/ci-sample.yaml
+          cmd: yq e -i -P  '.image.tag |= "${{ github.ref_name }}"' heybit-eks-apps/service-apps/envs/dev/ci-sample/values.yaml
 
       - name: Commit to EKS Config Repo
         uses: stefanzweifel/git-auto-commit-action@v4
