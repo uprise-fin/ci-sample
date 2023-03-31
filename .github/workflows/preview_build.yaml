@@ -12,7 +12,7 @@ on:
 jobs:
   build-docker:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, ('preview'||'qa-preview'))
+    if: contains(github.event.pull_request.labels.*.name, 'qa-preview')
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
