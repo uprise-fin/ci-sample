@@ -1,4 +1,4 @@
-# test7
+# test8
 FROM ghcr.io/uprise-fin/ci-sample:base-0.0.2 AS base
 
 RUN echo "sync shutdown halt lp uucp games ftp guest squid" | tr ' ' '\n' | xargs -I {} deluser {}
