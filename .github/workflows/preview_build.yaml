@@ -10,9 +10,9 @@ on:
     branches:
       - main
 jobs:
-  build-docker:
+  pr-build-docker:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'preview')
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'preview') || contains(github.event.pull_request.labels.*.name, 'qa-preview') }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
