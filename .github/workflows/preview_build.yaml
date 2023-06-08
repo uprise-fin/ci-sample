@@ -11,7 +11,8 @@ on:
       - main
 jobs:
   pr-build-docker:
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
+    runs-on: dind-enabled
     if: ${{ contains(github.event.pull_request.labels.*.name, 'preview') || contains(github.event.pull_request.labels.*.name, 'qa-preview') }}
     steps:
       - name: Check out repository code
